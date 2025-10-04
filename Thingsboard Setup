@@ -79,3 +79,8 @@ const char* access_token = "DEVICE_ACCESS_TOKEN";
 
 You can find the access token in ThingsBoard under:
 Devices → Your Device → Details → Access Token
+
+## Step 8 Install the ThingsBoard Library in Arduino IDE
+Open Arduino IDE → go to Sketch → Include Library → Manage Libraries.
+Search for “ThingsBoard”.
+Install ThingsBoard by ThingsBoard (latest version).
