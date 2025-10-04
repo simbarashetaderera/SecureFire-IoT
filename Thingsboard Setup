@@ -1,1 +1,81 @@
+# Step-by-Step Guide to Deploy ThingsBoard on Windows via Docker Desktop
 
+This guide explains how to set up **ThingsBoard** on **Windows 10/11** using **Docker Desktop**.
+
+## Requirements
+
+Make sure you have:
+- Windows 10/11 (64-bit)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running
+- Internet connection
+- Administrator access
+
+## Step 1: Verify Docker Installation
+Open **PowerShell** or **Command Prompt** and run: bash
+mkdir C:\thingsboard-docker
+cd C:\thingsboard-docker
+
+## Step 3: Create a docker-compose.yml File
+
+In C:\thingsboard-docker, create a file named docker-compose.yml and paste the following content:
+
+version: '3.3'
+services:
+  postgres:
+    image: postgres:14
+    container_name: tb-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: thingsboard
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+  thingsboard:
+    image: thingsboard/tb-postgres
+    container_name: thingsboard
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+      - "1883:1883"
+      - "5683-5688:5683-5688/udp"
+    environment:
+      TB_QUEUE_TYPE: in-memory
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/thingsboard
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: root
+    volumes:
+      - ./tb-data:/data
+      - ./tb-logs:/var/log/thingsboard
+
+Step 4: Initialize the Database
+
+Run this command once to set up the ThingsBoard database:
+docker compose run --rm thingsboard install
+Wait until initialization logs finish.
+
+## Step 5: Start ThingsBoard
+Bring the containers up:
+docker compose up -d
+This will start:
+PostgreSQL
+ThingsBoard service
+
+Step 6: Access the Web UI
+
+After 1–2 minutes, open your browser and visit:
+👉 http://localhost:8080
+### Default login credentials
+*Role*	       *Username*	                      *Password*
+Tenant	       tenant@thingsboard.org           tenant	
+Sysadmin	     sysadmin@thingsboard.org         sysadmin
+
+## Step 7: Connect Your ESP8266 (NodeMCU)
+In your ESP8266 code, set the MQTT server to your Windows PC IP address (not localhost):
+const char* mqtt_server = "192.168.x.x";  // Your Windows IP
+const int mqtt_port = enter_port_number;
+const char* access_token = "DEVICE_ACCESS_TOKEN";
+
+You can find the access token in ThingsBoard under:
+Devices → Your Device → Details → Access Token
