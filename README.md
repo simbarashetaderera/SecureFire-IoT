@@ -8,7 +8,6 @@ SecureFire-IoT is an Internet of Things (IoT) based Smart Fire Detection and Sup
 - [Cybersecurity & Forensic Readiness](#cybersecurity--forensic-readiness)
 - [System Architecture](#system-architecture)
 - [Hardware Architecture](#hardware-architecture)
-- [Circuit Board](#circuit-board)
 - [Software Architecture](#software-architecture)
 - [Flowchart Design](#flowchart-design)
 - [Installation](#installation)
@@ -47,9 +46,6 @@ SecureFire-IoT is an Internet of Things (IoT) based Smart Fire Detection and Sup
 
 ## Hardware Architecture
 <img src="https://github.com/user-attachments/assets/55c1b5d7-a0f0-4ebe-b2e5-f34291df47cd" alt="Hardware Architecture" width="500" height="300"/>
-
-## Circuit Board
-<img src="https://github.com/user-attachments/assets/725523f5-a967-4b9d-bbe8-cb5b218d8989" alt="Circuit Board" width="500" height="300"/>
 
 ## Software Architecture
 <img src="https://github.com/user-attachments/assets/e4c455b6-5428-4c65-ab01-a13f2332caa2" alt="Software Architecture" width="500" height="300"/>
